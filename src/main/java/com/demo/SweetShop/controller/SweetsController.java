@@ -49,5 +49,14 @@ public class SweetsController {
 		return service.deleteSweet(id);
 	}
 
+	@PostMapping("purchase/{id}/{purchase}")
+	public ResponseEntity<String> purchaseSweets(@PathVariable int id, @PathVariable int purchase) {
+		return service.purchaseSweets(id, purchase);
+	}
+
+	@PostMapping("restock/{id}/{restock}")
+	public ResponseEntity<String> restockSweets(@PathVariable int id, @PathVariable int restock) {
+		return service.restockSweets(id, restock);
+	}
 
 }

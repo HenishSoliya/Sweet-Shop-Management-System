@@ -67,5 +67,28 @@ public class SweetsService {
 
 	}
 
+	public ResponseEntity<String> purchaseSweets(int id, int purchase) {
+		try {
+			int availableStock = repository.findById(id).get().getQuantity();
+			if (availableStock < purchase)
+				return new ResponseEntity<String>("Purchase failed: only " + availableStock + " units are available.",
+						HttpStatus.BAD_REQUEST);
+			repository.updatePurchaseAmount(id, purchase);
+			return new ResponseEntity<String>("Purchase successful.", HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println(e);
+			return new ResponseEntity<String>("Purchase failed.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	public ResponseEntity<String> restockSweets(int id, int restock) {
+		try {
+			repository.updateRestockAmount(id, restock);
+			return new ResponseEntity<String>("Restock entry successful.", HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println(e);
+			return new ResponseEntity<String>("Restock entry failed.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
 }
