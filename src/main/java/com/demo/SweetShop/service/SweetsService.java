@@ -30,5 +30,21 @@ public class SweetsService {
 		return new ResponseEntity<List<Sweets>>(repository.findAll(), HttpStatus.OK);
 	}
 
+	public ResponseEntity<List<Sweets>> getSweets(String name, String category, double low, double high) {
+		if (name.equals("*"))
+			name = "";
+		if (category.equals("*"))
+			category = "";
+		if (high == 0)
+			return new ResponseEntity<List<Sweets>>(
+					repository.findByNameContainingIgnoreCaseAndCategoryContainingIgnoreCase(name, category),
+					HttpStatus.OK);
+		return new ResponseEntity<List<Sweets>>(
+				repository.findByNameContainingIgnoreCaseAndCategoryContainingIgnoreCaseAndPriceBetween(name, category,
+						low, high),
+				HttpStatus.OK);
+
+	}
+
 
 }
