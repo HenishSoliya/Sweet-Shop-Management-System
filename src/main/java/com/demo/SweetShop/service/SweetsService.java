@@ -56,5 +56,16 @@ public class SweetsService {
 		}
 	}
 
+	public ResponseEntity<String> deleteSweet(int id) {
+		try {
+			repository.deleteById(id);
+			return new ResponseEntity<String>("Data successfully deleted.", HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println(e);
+			return new ResponseEntity<String>("Data deletation failed.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+
 
 }
