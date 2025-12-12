@@ -46,5 +46,15 @@ public class SweetsService {
 
 	}
 
+	public ResponseEntity<String> updateSweet(Sweets sweets) {
+		try {
+			repository.save(sweets);
+			return new ResponseEntity<String>("Data successfully updated.", HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println(e);
+			return new ResponseEntity<String>("Data updation failed.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 
 }

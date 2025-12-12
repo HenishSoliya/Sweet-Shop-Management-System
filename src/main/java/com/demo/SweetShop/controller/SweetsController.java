@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +36,11 @@ public class SweetsController {
 	public ResponseEntity<List<Sweets>> getSweets(@PathVariable String name, @PathVariable String category,
 			@PathVariable double low, @PathVariable double high) {
 		return service.getSweets(name, category, low, high);
+	}
+
+	@PutMapping()
+	public ResponseEntity<String> updateSweet(@RequestBody Sweets sweets) {
+		return service.updateSweet(sweets);
 	}
 
 
