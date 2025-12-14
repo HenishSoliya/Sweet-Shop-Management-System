@@ -41,15 +41,11 @@ public class SecurityConfig {
 
 		return http.csrf(customizer -> customizer.disable())
 				.cors(cors -> cors.configurationSource(corsConfigurationSource()))
-				.authorizeHttpRequests(request -> request
-						.requestMatchers("/api/auth/**").permitAll()
-						.requestMatchers(HttpMethod.POST,"/api/sweets/purchase/**").hasAnyRole("USER","ADMIN")
-						.requestMatchers(HttpMethod.GET).hasAnyRole("USER","ADMIN")
-						.requestMatchers(HttpMethod.POST).hasRole("ADMIN")
-						.requestMatchers(HttpMethod.PUT).hasRole("ADMIN")
-						.requestMatchers(HttpMethod.DELETE).hasRole("ADMIN")
-						.anyRequest()
-						.authenticated())
+				.authorizeHttpRequests(request -> request.requestMatchers("/api/auth/**").permitAll()
+						.requestMatchers(HttpMethod.POST, "/api/sweets/purchase/**").hasAnyRole("USER", "ADMIN")
+						.requestMatchers(HttpMethod.GET).hasAnyRole("USER", "ADMIN").requestMatchers(HttpMethod.POST)
+						.hasRole("ADMIN").requestMatchers(HttpMethod.PUT).hasRole("ADMIN")
+						.requestMatchers(HttpMethod.DELETE).hasRole("ADMIN").anyRequest().authenticated())
 				.httpBasic(Customizer.withDefaults())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class).build();
@@ -59,7 +55,7 @@ public class SecurityConfig {
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(List.of("http://localhost:*"));
+		configuration.setAllowedOriginPatterns(List.of("http://localhost:*"));
 		configuration.addAllowedMethod("*");
 		configuration.addAllowedHeader("*");
 		configuration.setAllowCredentials(true);
