@@ -1,6 +1,6 @@
 # 🍬 Sweet Shop Management System
 
-This repository documentation covers **Backend** of the Sweet Shop Management System. Each section includes project explanation, local setup instructions, screenshot placeholders, and the mandatory **My AI Usage** section.
+This repository documentation covers **Backend** of the Sweet Shop Management System. Each section includes project explanation, local setup instructions, screenshots, **My AI Usage**, and Future Scope.
 
 ---
 
